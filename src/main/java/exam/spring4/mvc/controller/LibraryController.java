@@ -21,7 +21,7 @@ public class LibraryController {
 
     @PostMapping("/new")
     public String addok(LibraryVO lib) {
-        String view = "addfail";
+        String view = "error";
 
         if(libsrv.addLib(lib)) {
             view ="redirect:/list";
@@ -43,7 +43,7 @@ public class LibraryController {
     @GetMapping("/view")
     public ModelAndView view(int lbno) {
         ModelAndView mv = new ModelAndView();
-        String view = "viewfail";
+        String view = "error";
 
         LibraryVO lib = libsrv.readOneLib(lbno);
         if(lib != null) {
@@ -59,7 +59,7 @@ public class LibraryController {
     public ModelAndView modify(int lbno) {
         ModelAndView mv = new ModelAndView();
         LibraryVO lib = libsrv.readOneLib(lbno);
-        String view = "modifyfail";
+        String view = "error";
 
         if(lib != null) {
             mv.addObject("lib",lib);
@@ -72,7 +72,7 @@ public class LibraryController {
 
     @PostMapping("/modify")
     public String updateok(LibraryVO lib){
-        String view = "modifyfail";
+        String view = "error";
         if(libsrv.modifyLib(lib)) view = "redirect:/view?lbno="+lib.getLbno();
 
         return view;
@@ -80,7 +80,7 @@ public class LibraryController {
 
     @GetMapping("/remove")
     public String remove(int lbno){
-        String view = "removefail";
+        String view = "error";
         if(libsrv.removeLib(lbno)) view = "redirect:/list";
 
         return view;
